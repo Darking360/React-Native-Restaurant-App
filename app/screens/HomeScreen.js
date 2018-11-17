@@ -17,7 +17,7 @@ import { fetchCuisineTypes, fetchRestaurant, fetchRestaurantByType } from '../..
 
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: <PrimaryText>Restaurant App</PrimaryText>,
+    headerTitle: <PrimaryText>Order my Food</PrimaryText>,
     headerRight: <SignOutButton />,
   });
 
@@ -48,9 +48,9 @@ class HomeScreen extends Component {
   openCuisineScreen = (value) => {
     Actions.cuisineRestaurants({
       cuisineType: value,
-      backTitle: 'Back',
+      backTitle: 'Atras',
       title: startCase(value),
-      rightTitle: 'Sign Out',
+      rightTitle: 'Cerrar sesion',
       onRight: () => this.handleSignOut(),
     });
   };
@@ -70,7 +70,7 @@ class HomeScreen extends Component {
         {
           filterData.length > 0 &&
           <FilterRadioModal
-            heading="Cuisine Type"
+            heading="Categoria"
             data={filterData}
             // eslint-disable-next-line no-return-assign
             pRef={el => (this.filterModalRef = el)}

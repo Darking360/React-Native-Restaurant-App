@@ -118,7 +118,7 @@ class FilterRadioModal extends Component {
                 key={-1}
                 value={null}
               >
-                <RadioText>All</RadioText>
+                <RadioText>Todas</RadioText>
               </RadioButton>
 
               {
@@ -140,7 +140,7 @@ class FilterRadioModal extends Component {
             <RoundButton
               buttonColor={Colors.moneyColor}
               small
-              title="Apply"
+              title="Aplicar"
               onPress={this.closeModal}
             />
           </CheckWrap>

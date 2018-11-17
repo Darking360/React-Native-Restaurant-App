@@ -43,7 +43,7 @@ const SectionItem = styled.View`
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;  
+  align-items: flex-start;
 `;
 
 class PaymentHome extends Component {
@@ -148,7 +148,7 @@ class PaymentHome extends Component {
             <Section>
               <SectionItem>
                 <Heading>SELLER</Heading>
-                <SubHeading>Restaurant App</SubHeading>
+                <SubHeading>Order my Food</SubHeading>
               </SectionItem>
               <SectionItem>
                 <Heading>PRICE</Heading>

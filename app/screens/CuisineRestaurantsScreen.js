@@ -13,7 +13,7 @@ import SignOutButton from '../components/RightHeaderButtons';
 
 class CuisineRestaurantScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: <PrimaryText>Restaurant App</PrimaryText>,
+    headerTitle: <PrimaryText>Order my Food</PrimaryText>,
     headerRight: <SignOutButton />,
   });
 

@@ -85,7 +85,7 @@ const AppRouter = () => (
               fontFamily: 'Roboto Slab',
               color: Colors.primaryColor,
             }}
-            title="Cart"
+            title="Carrito"
           />
 
           <Scene
@@ -106,7 +106,7 @@ const AppRouter = () => (
           <Scene
             key="showAllOrders"
             component={OrdersList}
-            title="My Orders"
+            title="Mis ordenes"
           />
         </Scene>
       </Drawer>

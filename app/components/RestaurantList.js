@@ -32,7 +32,7 @@ class RestaurantList extends Component {
           flex: 1,
         }}
       >
-        Restaurants
+        Restaurantes
       </PrimaryText>
       {
         !this.props.hideFilter &&
