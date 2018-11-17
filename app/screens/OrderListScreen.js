@@ -81,3 +81,5 @@ OrdersList.propTypes = {
 const mapStateToProps = ({ orders }) => ({ ordersList: orders.ordersList });
 
 export default connect(mapStateToProps, { fetchOrders })(OrdersList);
+
+// TODO list order for both store or user
