@@ -11,6 +11,8 @@ import ViewRow from '../base_components/ViewRow';
 import Colors from '../../src/constants/colors';
 import FlatButton from '../base_components/FlatButton';
 
+import { translate } from '../../src/utils/language';
+
 class FoodItem extends React.Component {
   render() {
     const { food, onPress } = this.props;
@@ -64,7 +66,7 @@ class FoodItem extends React.Component {
                 {info.name}
               </PrimaryText>
               <SecondaryText>
-                {info.type}
+                {translate[info.type]}
               </SecondaryText>
             </View>
             <View

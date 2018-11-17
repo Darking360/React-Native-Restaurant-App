@@ -9,6 +9,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import RoundButton from '../base_components/RoundButton';
 import BR from '../base_components/BR';
 import Colors from '../../src/constants/colors';
+import { translate } from '../../src/utils/language';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -131,7 +132,7 @@ class FilterRadioModal extends Component {
                     key={index}
                     value={item.value}
                   >
-                    <RadioText>{item.label || item.value}</RadioText>
+                    <RadioText>{translate[item.value]}</RadioText>
                   </RadioButton>
                 ))
               }

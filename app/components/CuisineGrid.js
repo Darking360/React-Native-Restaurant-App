@@ -8,6 +8,7 @@ import startCase from 'lodash/startCase';
 import Assets from '../../src/constants/assets';
 import PrimaryText from '../base_components/PrimaryText';
 import ViewRow from '../base_components/ViewRow';
+import { translate } from '../../src/utils/language';
 
 class CuisineGrid extends Component {
   renderHeader = () => (
@@ -87,7 +88,7 @@ class CuisineGrid extends Component {
           marginTop: 20,
         }}
         >
-          {startCase(item)}
+          {startCase(translate[item])}
         </PrimaryText>
       </View>
     </TouchableOpacity>
