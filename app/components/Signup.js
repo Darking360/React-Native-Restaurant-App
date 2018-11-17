@@ -18,7 +18,7 @@ class SignupComponent extends Component {
       loading, onSignupSubmit,
       onEmailChange, onPasswordChange,
       registerError, disableSignUp,
-      registerMessage,
+      registerMessage
     } = this.props;
 
     if (registerMessage && registerMessage.success) {
@@ -62,7 +62,6 @@ class SignupComponent extends Component {
             marginRight: 'auto',
           }}
           underlineColorAndroid="#B9B9B9"
-          value=""
           secureTextEntry
           placeholder="Password"
         />

@@ -1,4 +1,4 @@
-export const API_BASE = 'http://localhost:3000';
+export const API_BASE = 'https://order-my-food.herokuapp.com';
 
 export const LOGIN_URL = '/auth/login';
 export const REGISTER_URL = '/auth/register';
