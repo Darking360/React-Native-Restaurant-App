@@ -40,7 +40,7 @@ class BillReceipt extends Component {
           }}
         >
           <View>
-            <BillTitle>Bill Receipt</BillTitle>
+            <BillTitle>Resumen Orden</BillTitle>
           </View>
           {
             this.props.billInfo.map((item, index) => {
@@ -55,7 +55,7 @@ class BillReceipt extends Component {
           }
           <HorizontalLine />
           <BillRow>
-            <Text>Total Pay</Text>
+            <Text>Total a pagar</Text>
             <Text>{parseFloat(total).toFixed(2)} ₹</Text>
           </BillRow>
         </Container>

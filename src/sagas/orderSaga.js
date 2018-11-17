@@ -42,6 +42,10 @@ function* orderTask(action) {
     const authToken = yield select(authTokenSelector);
     const userId = yield select(userIdSelector);
 
+    console.log('AIuda ---->')
+    console.log(authToken)
+    console.log(userId)
+
     const res = yield call(API.createOrder, userId, payload.items, payload.total, {
       Authorization: `Bearer ${authToken}`,
     });

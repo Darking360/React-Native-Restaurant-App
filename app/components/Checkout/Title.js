@@ -15,7 +15,7 @@ const TitleText = styled.Text`
 const Title = () => (
   <TitleContainer>
     <TitleText>
-      Cart Items
+      Items Carrito
     </TitleText>
   </TitleContainer>
 );

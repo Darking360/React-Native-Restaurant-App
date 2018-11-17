@@ -61,6 +61,7 @@ class RestaurantInfoScreen extends Component {
     if (item) {
       return (
         <FoodItem
+          key={item.food._id}
           food={item}
           onPress={() => this.props.updateCartItems(item, 1)}
         />

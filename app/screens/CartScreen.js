@@ -151,7 +151,7 @@ class CartScreen extends Component {
             onPress={() => this.handlePayment(totalAmount)}
           >
             <FooterText>
-              Proceed To Pay
+              Crear orden
             </FooterText>
           </PayButton>
         </FooterContainer>

@@ -71,11 +71,11 @@ class RestaurantList extends Component {
             />
             <BR />
             <PrimaryText>
-              {'We couldn\'t find anything.'}
+              {'No pudimos encontrar nada.'}
             </PrimaryText>
             <BR />
             <PrimaryText>
-              Please try again...
+              Por favor intenta de nuevo...
             </PrimaryText>
           </View>
         </View>
