@@ -9,7 +9,7 @@ export default {
     'north-indian': require('../../assets/images/north-indian.png'),
     biryanis: require('../../assets/images/biryani.png'),
     desserts: require('../../assets/images/desserts.png'),
-    'ice-creams': require('../../assets/images/ice-creams.png'),
+    'ice-cream': require('../../assets/images/ice-creams.png'),
     mexican: require('../../assets/images/mexican.png'),
     pizza: require('../../assets/images/pizza.png'),
     foodBg: require('../../assets/images/foodBg.png'),

@@ -15,6 +15,8 @@ class FoodItem extends React.Component {
   render() {
     const { food, onPress } = this.props;
     const { food: info } = food;
+    console.log('Aiuda ---->')
+    console.log(info)
     if (!info) {
       return <LoadingFood />;
     }
@@ -38,7 +40,7 @@ class FoodItem extends React.Component {
           }}
         >
           <Image
-            source={Assets.Images.placeholderFood}
+            source={Assets.Images[info.type]}
             style={{
               width: '100%',
               height: 150,
@@ -71,7 +73,7 @@ class FoodItem extends React.Component {
               }}
             >
               <PrimaryText size={20} color={Colors.moneyColor}>
-                &#8377; {food.price}
+                $ {food.price}
               </PrimaryText>
             </View>
           </ViewRow>
