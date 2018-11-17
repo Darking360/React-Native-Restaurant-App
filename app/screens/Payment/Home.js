@@ -48,7 +48,7 @@ const SectionItem = styled.View`
 
 class PaymentHome extends Component {
   static navigationOptions = {
-    title: (<PrimaryText style={{ flex: 1 }}> Make Payment</PrimaryText>),
+    title: (<PrimaryText style={{ flex: 1 }}> Realizar Pago</PrimaryText>),
     headerStyle: {
       backgroundColor: '#f5f5f5',
       borderBottomWidth: 1,
@@ -140,18 +140,18 @@ class PaymentHome extends Component {
             <BR size={10} />
             <Section>
               <SectionItem>
-                <Heading>{'Order Id'.toUpperCase()}</Heading>
+                <Heading>{'ID de la Orden'.toUpperCase()}</Heading>
                 <SubHeading>{orderId}</SubHeading>
               </SectionItem>
             </Section>
 
             <Section>
               <SectionItem>
-                <Heading>SELLER</Heading>
+                <Heading>SERVICIO</Heading>
                 <SubHeading>Order my Food</SubHeading>
               </SectionItem>
               <SectionItem>
-                <Heading>PRICE</Heading>
+                <Heading>PRECIO</Heading>
                 <SubHeading>$ {totalAmount}</SubHeading>
               </SectionItem>
             </Section>
@@ -163,7 +163,7 @@ class PaymentHome extends Component {
             }}
             >
               <SectionItem>
-                <Heading>Date</Heading>
+                <Heading>Fecha</Heading>
                 <SubHeading>{new Date().toDateString()}</SubHeading>
               </SectionItem>
             </Section>
@@ -188,12 +188,13 @@ class PaymentHome extends Component {
                   borderRadius: 6,
                 }}
                 onChange={debounce(this._onChange, 500)}
+                labels={{ number: "NUMERO DE TARJETA", expiry: "VENCIMIENTO", cvc: "CVC/CCV" }}
               />
             </View>
 
             <RoundButton
               loading={this.state.loadingPayment}
-              title="Make Payment"
+              title="Pagar"
               buttonColor={Colors.green}
               onPress={() => this.doPayment()}
               disabled={!this.state.validData}
@@ -204,7 +205,7 @@ class PaymentHome extends Component {
             />
 
             <RoundButton
-              title="Cancel Order"
+              title="Cancelar"
               onPress={() => this.handleCancelOrder()}
               baseStyle={{
                 marginTop: 30,

@@ -48,7 +48,7 @@ const Currency = styled.Text`
 
 class PaymentComplete extends Component {
   static navigationOptions = {
-    title: (<PrimaryText style={{ flex: 1 }}>Payment Complete</PrimaryText>),
+    title: (<PrimaryText style={{ flex: 1 }}>Pago exitoso</PrimaryText>),
     headerLeft: null,
   };
 
@@ -56,7 +56,7 @@ class PaymentComplete extends Component {
     const { totalAmount } = this.props;
     let rupee = `${totalAmount}`;
     let paise = '00';
-    if (totalAmount.includes('.')) {
+    if (totalAmount.toString().includes('.')) {
       rupee = (`${totalAmount}`).split('.')[0];
       try {
         paise = (`${totalAmount}`).split('.')[1].padEnd(2, '0') || '00';
@@ -74,7 +74,7 @@ class PaymentComplete extends Component {
         }}
       >
         <ImageSection>
-          <SuccessText>Payment Successful</SuccessText>
+          <SuccessText>Pago exitoso</SuccessText>
           <Image
             style={{
               width: 120,
@@ -84,7 +84,7 @@ class PaymentComplete extends Component {
             source={Assets.Images.paymentComplete}
           />
 
-          <SuccessText>Your payment has been approved!</SuccessText>
+          <SuccessText>Tu pago ha sido aprobado!</SuccessText>
           <Divider />
         </ImageSection>
 
@@ -104,9 +104,9 @@ class PaymentComplete extends Component {
           baseStyle={{
             alignSelf: 'flex-end',
           }}
-          title="Back to Home"
+          title="Ir a Inicio"
           onPress={() => {
-            Actions.reset('homeScreen');
+            Actions.reset('drawer');
           }}
         />
       </AppBase>

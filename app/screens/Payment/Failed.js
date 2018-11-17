@@ -49,7 +49,7 @@ const Currency = styled.Text`
 
 class PaymentFailed extends Component {
   static navigationOptions = {
-    title: (<PrimaryText style={{ flex: 1 }}>Payment Complete</PrimaryText>),
+    title: (<PrimaryText style={{ flex: 1 }}>Pago rechazado</PrimaryText>),
     headerLeft: null,
   };
 
@@ -57,7 +57,7 @@ class PaymentFailed extends Component {
     const { totalAmount } = this.props;
     let rupee = `${totalAmount}`;
     let paise = '00';
-    if (totalAmount.includes('.')) {
+    if (totalAmount.toString().includes('.')) {
       rupee = (`${totalAmount}`).split('.')[0];
       try {
         paise = (`${totalAmount}`).split('.')[1].padEnd(2, '0') || '00';
@@ -74,7 +74,7 @@ class PaymentFailed extends Component {
         }}
       >
         <ImageSection>
-          <ErrorText>Payment Failed!</ErrorText>
+          <ErrorText>El pago ha fallado!</ErrorText>
           <Image
             style={{
               width: 120,
@@ -84,7 +84,7 @@ class PaymentFailed extends Component {
             source={Assets.Images.paymentFailed}
           />
 
-          <ErrorText>Your payment has been approved!</ErrorText>
+          <ErrorText>Tu pago fue rechazado!</ErrorText>
           <Divider />
         </ImageSection>
 
@@ -103,9 +103,9 @@ class PaymentFailed extends Component {
         <RoundButton
           outline
           outlineColor="#777777"
-          title="Go to Home."
+          title="Ir a Inicio"
           onPress={() => {
-            Actions.reset('homeScreen');
+            Actions.reset('drawer');
           }}
         />
       </AppBase>

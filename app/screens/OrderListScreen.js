@@ -37,29 +37,29 @@ class OrdersList extends React.Component {
   }
   mapItems = items => items.map(item => (
     <View>
-      <Text>{`ItemId: ${item.id}`}</Text>
-      <Text>{`Price: Rs. ${item.price}`}</Text>
+      <Text>{`Item ID: ${item.id}`}</Text>
+      <Text>{`Price: $. ${item.price}`}</Text>
     </View>
   ))
   renderItem = ({ item, index }) => (
     <View style={styles.card}>
       <View style={styles.divider}>
-        <Text style={styles.heading}>Order Id</Text>
+        <Text style={styles.heading}>ID de la Orden</Text>
         <Text>{item._id}</Text>
       </View>
       <View style={styles.divider}>
-        <Text style={styles.heading}>Total Price:</Text>
-        <Text>{`Rs. ${item.totalCost}`}</Text>
+        <Text style={styles.heading}>Total:</Text>
+        <Text>{`$. ${item.totalCost}`}</Text>
       </View>
       <View style={styles.divider}>
-        <Text style={styles.item}>Items ordered</Text>
+        <Text style={styles.item}>Items ordenados</Text>
         {item.items.map(this.mapItems)}
       </View>
     </View>
   )
   render() {
     if (this.props.ordersList === null) {
-      return (<Text>Nothing found</Text>);
+      return (<Text>Nada fue encontrado</Text>);
     }
     return (
       <View style={styles.container}>

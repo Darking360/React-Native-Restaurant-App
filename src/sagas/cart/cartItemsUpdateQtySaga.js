@@ -11,7 +11,7 @@ function* cartItemUpdateQty(action) {
     const currentCart = yield select(cartItemsSelector);
 
     const newCart = currentCart.map((obj) => {
-      if (obj._id === action.payload.foodId) {
+      if (obj.food._id === action.payload.foodId) {
         const newObj = obj;
         newObj.qty = action.payload.qty;
         return newObj;
