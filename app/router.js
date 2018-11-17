@@ -6,6 +6,7 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import Colors from '../src/constants/colors';
 import SignupScreen from './screens/SignupScreen';
+import SignupStoreScreen from './screens/SignupStoreScreen';
 import RestaurantInfoScreen from './screens/RestaurantInfoScreen';
 import CuisineRestaurantsScreen from './screens/CuisineRestaurantsScreen';
 import CartScreen from './screens/CartScreen';
@@ -31,6 +32,12 @@ const AppRouter = () => (
       <Scene
         key="signupScreen"
         component={SignupScreen}
+        title={'Registro Usuario'}
+      />
+      <Scene
+        key="signupStoreScreen"
+        component={SignupStoreScreen}
+        title={'Registro Tienda'}
       />
       <Drawer
         key="drawer"
@@ -44,7 +51,7 @@ const AppRouter = () => (
           <Scene
             key="homeScreen"
             component={HomeScreen}
-            title="Restaurant App"
+            title="Order my Food"
             titleStyle={{
               fontFamily: 'Roboto Slab',
               color: Colors.primaryColor,

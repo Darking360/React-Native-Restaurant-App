@@ -25,7 +25,7 @@ class LoginComponent extends Component {
           justifyContent: 'center',
         }}
       >
-        <PrimaryText bold size={26}>Restaurant App</PrimaryText>
+        <PrimaryText bold size={26}>Order my Food</PrimaryText>
         <BR size={50} />
         {loginError && <PrimaryText>{loginError.message}</PrimaryText>}
         <BR size={50} />
@@ -40,7 +40,7 @@ class LoginComponent extends Component {
           }}
           defaultValue="Test@gmail.com"
           underlineColorAndroid="#B9B9B9"
-          placeholder="Email Address"
+          placeholder="Email"
         />
         <BR />
         <TextInput
@@ -60,11 +60,11 @@ class LoginComponent extends Component {
         <TextButton
           onPress={() => {
           }}
-          title="Forgot Password?"
+          title="Olvidaste tu contrasenia?"
         />
         <BR />
         <RoundButton
-          title="Sign In"
+          title="Iniciar sesion"
           disabled={disableLogin}
           loading={loading}
           onPress={onLoginSubmit}
@@ -73,8 +73,14 @@ class LoginComponent extends Component {
         <RoundButton
           primary
           buttonColor={Colors.blue}
-          title="Sign Up"
+          title="Registro Usuario"
           onPress={() => Actions.signupScreen()}
+        />
+        <RoundButton
+          primary
+          buttonColor={Colors.green}
+          title="Registro Tienda"
+          onPress={() => Actions.signupStoreScreen()}
         />
         <BR size={20} />
       </AppBase>

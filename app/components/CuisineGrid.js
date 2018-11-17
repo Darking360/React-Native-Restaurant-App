@@ -29,7 +29,7 @@ class CuisineGrid extends Component {
           flex: 1,
         }}
       >
-        Cuisine
+        Categorias
       </PrimaryText>
     </ViewRow>);
 

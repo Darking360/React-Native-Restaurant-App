@@ -34,14 +34,26 @@ class SignupScreen extends Component {
     });
   };
 
+  handleNameChange = (name) => {
+    this.setState({
+      name,
+    });
+  };
+
+  handleDescriptionChange = (description) => {
+    this.setState({
+      description,
+    });
+  };
+
   render() {
     const { registerLoading, registerError, registerMessage } = this.props;
-    const { email, password } = this.state;
-    const disableSignUp = (!email || email.length === 0 || !password || password.length === 0);
+    const { email, password, name, description } = this.state;
+    const disableSignUp = (!email || email.length === 0 || !password || password.length === 0 || !name || name.length === 0 || !description || description.length === 0);
 
     return (
       <SignupComponent
-        type={'user'}
+        type={'store'}
         loading={registerLoading}
         registerMessage={registerMessage}
         registerError={registerError}
@@ -49,8 +61,8 @@ class SignupScreen extends Component {
         onSignupSubmit={this.handleSignUpSubmit}
         onEmailChange={this.handleEmailChange}
         onPasswordChange={this.handlePasswordChange}
-        email={email}
-        password={password}
+        onNameChange={this.handleNameChange}
+        onDescriptionChange={this.handleDescriptionChange}
       />);
   }
 }

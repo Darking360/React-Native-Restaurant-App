@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 import { Actions } from 'react-native-router-flux';
+import { ScrollView } from 'react-native';
 
 
 import AppBase from '../base_components/AppBase';
@@ -17,8 +18,10 @@ class SignupComponent extends Component {
     const {
       loading, onSignupSubmit,
       onEmailChange, onPasswordChange,
+      onNameChange, onDescriptionChange,
       registerError, disableSignUp,
-      registerMessage
+      registerMessage, type,
+      email, password, name, description
     } = this.props;
 
     if (registerMessage && registerMessage.success) {
@@ -30,12 +33,12 @@ class SignupComponent extends Component {
     }
 
     return (
-      <AppBase
-        style={{
+      <ScrollView
+        contentContainerLayout={{
           justifyContent: 'flex-start',
         }}
       >
-        <PrimaryText bold size={26}>Sign Up</PrimaryText>
+        <PrimaryText bold size={26}>{type === 'user' ? 'Persona' : 'Tienda'}</PrimaryText>
         <BR size={20} />
         {registerError && <PrimaryText>{registerError.message}</PrimaryText>}
         {registerMessage && <PrimaryText>{JSON.stringify(registerMessage)}</PrimaryText>}
@@ -50,7 +53,8 @@ class SignupComponent extends Component {
             marginRight: 'auto',
           }}
           underlineColorAndroid="#B9B9B9"
-          placeholder="Username"
+          value={email}
+          placeholder="Email"
         />
         <BR />
         <TextInput
@@ -63,16 +67,50 @@ class SignupComponent extends Component {
           }}
           underlineColorAndroid="#B9B9B9"
           secureTextEntry
+          value={password}
           placeholder="Password"
         />
         <BR />
+        {
+          type === 'store' && (
+            <React.Fragment>
+              <TextInput
+                autoCorrect={false}
+                onChangeText={debounce(onNameChange, 500)}
+                style={{
+                  width: '80%',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+                value={name}
+                underlineColorAndroid="#B9B9B9"
+                placeholder="Nombre de la Tienda"
+              />
+              <BR />
+              <TextInput
+                autoCorrect={false}
+                onChangeText={debounce(onDescriptionChange, 500)}
+                style={{
+                  width: '80%',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+                underlineColorAndroid="#B9B9B9"
+                multiline
+                value={description}
+                placeholder="Descripcion"
+              />
+              <BR />
+            </React.Fragment>
+          )
+        }
         <RoundButton
-          title="Sign Up"
+          title="Registrar"
           disabled={disableSignUp}
           loading={loading}
           onPress={onSignupSubmit}
         />
-      </AppBase>
+      </ScrollView>
     );
   }
 }
