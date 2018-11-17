@@ -74,7 +74,7 @@ class LoadingView extends React.Component {
             fontFamily: 'Roboto Slab',
           }}
         >
-          Hang on. we will be right back…
+          Espera un momento…
         </Text>
       </AppBase>
     );

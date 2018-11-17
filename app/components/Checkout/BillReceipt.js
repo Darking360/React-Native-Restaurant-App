@@ -48,7 +48,7 @@ class BillReceipt extends Component {
               return (
                 <BillRow key={item.name}>
                   <Text>{item.name}</Text>
-                  <Text>{item.total} ₹</Text>
+                  <Text>{item.total} $</Text>
                 </BillRow>
               );
             })
@@ -56,7 +56,7 @@ class BillReceipt extends Component {
           <HorizontalLine />
           <BillRow>
             <Text>Total a pagar</Text>
-            <Text>{parseFloat(total).toFixed(2)} ₹</Text>
+            <Text>{parseFloat(total).toFixed(2)} $</Text>
           </BillRow>
         </Container>
         <TearLines

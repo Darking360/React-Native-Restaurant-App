@@ -66,9 +66,9 @@ class CartScreen extends Component {
 
   handleItemValueChange = (item, qty) => {
     if (qty === 0) {
-      this.props.deleteCartItem(item._id);
+      this.props.deleteCartItem(item.food._id);
     } else {
-      this.props.updateCartItemQty(item._id, qty);
+      this.props.updateCartItemQty(item.food._id, qty);
     }
   };
 
@@ -90,7 +90,7 @@ class CartScreen extends Component {
     <Item
       key={item._id}
       name={item.food.name}
-      price={`₹${item.price * item.qty}`}
+      price={`$${item.price * item.qty}`}
       qty={item.qty}
       onChange={qty => this.handleItemValueChange(item, qty)}
     />
@@ -145,7 +145,7 @@ class CartScreen extends Component {
       return (
         <FooterContainer>
           <AmountContainer>
-            <PrimaryText>₹ {totalAmount}</PrimaryText>
+            <PrimaryText>$ {totalAmount}</PrimaryText>
           </AmountContainer>
           <PayButton
             onPress={() => this.handlePayment(totalAmount)}
@@ -173,20 +173,20 @@ class CartScreen extends Component {
 
     const billInfo = [
       {
-        name: 'Items Total',
+        name: 'Total por Items',
         total: totalBill,
       },
       {
-        name: 'Offer Discount',
+        name: 'Descuento',
         total: -18,
       },
       {
-        name: `Taxes (${taxPercent}%)`,
+        name: `Impuestos (${taxPercent}%)`,
         total: tax,
       },
       {
-        name: 'Delivery Charges',
-        total: 30,
+        name: 'Costo por Envio',
+        total: 10,
       },
     ];
 

@@ -10,7 +10,7 @@ function* cartItemDelete(action) {
   try {
     const currentCart = yield select(cartItemsSelector);
 
-    const newCart = currentCart.filter(obj => obj._id !== action.payload);
+    const newCart = currentCart.filter(obj => obj.food._id !== action.payload);
 
     yield call(storage.setItem, 'userCart', JSON.stringify(newCart));
 

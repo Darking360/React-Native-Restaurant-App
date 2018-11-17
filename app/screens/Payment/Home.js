@@ -152,7 +152,7 @@ class PaymentHome extends Component {
               </SectionItem>
               <SectionItem>
                 <Heading>PRICE</Heading>
-                <SubHeading>₹ {totalAmount}</SubHeading>
+                <SubHeading>$ {totalAmount}</SubHeading>
               </SectionItem>
             </Section>
 
