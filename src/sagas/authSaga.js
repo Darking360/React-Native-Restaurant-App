@@ -6,6 +6,37 @@ const authTokenSelector = state => state.auth.loginMessage.token;
 
 import Auth from '../service/login';
 
+function* recoverTask(action) {
+  try {
+    yield put({
+      type: 'RECOVER_LOADING_ON',
+    });
+    const { payload } = action;
+
+    const res = yield call(Auth.recoverPassword, payload.email);
+
+    if (res.status === 200) {
+      yield put({
+        type: 'RECOVER_LOADING_OFF',
+      });
+      ToastAndroid.show('Te enviaremos un correo si el usuario existe!', ToastAndroid.SHORT);
+      payload.cb();
+    } else {
+      yield put({
+        type: 'RECOVER_LOADING_OFF',
+      });
+      ToastAndroid.show('Algo ha ido mal, intenta de nuevo!', ToastAndroid.SHORT);
+    }
+  } catch (e) {
+    console.log(e);
+    const payload = typeof e === 'string' ? { message: e } : e.data;
+    yield put({
+      type: 'RECOVER_LOADING_OFF',
+    });
+    ToastAndroid.show('Algo ha ido mal, intenta de nuevo!', ToastAndroid.SHORT);
+  }
+}
+
 function* updateTask(action) {
   try {
     yield put({
@@ -123,6 +154,7 @@ function* authSaga() {
   yield takeLatest('AUTH_REGISTER', registerTask);
   yield takeLatest('AUTH_LOGOUT', logoutTask);
   yield takeLatest('UPDATE_USER', updateTask);
+  yield takeLatest('RECOVER_PASSWORD', recoverTask);
 }
 
 export default authSaga;

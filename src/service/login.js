@@ -1,5 +1,5 @@
 import request from './request';
-import { LOGIN_URL, REGISTER_URL, UPDATE_URL } from './api_constants';
+import { LOGIN_URL, REGISTER_URL, UPDATE_URL, RECOVER_URL } from './api_constants';
 
 function doLogin(email, password) {
   const data = {
@@ -32,8 +32,13 @@ function updateProfile(email, password, name, description, address, headers) {
   return request({ url: UPDATE_URL, method: 'PATCH', data, headers });
 }
 
+function recoverPassword(email) {
+  return request({ url: `${RECOVER_URL}?email=${email}`, method: 'GET' });
+}
+
 export default {
   doLogin,
   doRegister,
   updateProfile,
+  recoverPassword,
 };

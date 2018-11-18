@@ -6,6 +6,7 @@ const initialState = {
   registerError: null,
   registerMessage: null,
   loadingUpdate: false,
+  loadingRecover: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -61,6 +62,10 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, loadingUpdate: true };
     case 'UPDATE_LOADING_OFF':
       return { ...state, loadingUpdate: false };
+    case 'RECOVER_LOADING_ON':
+      return { ...state, loadingRecover: true };
+    case 'RECOVER_LOADING_OFF':
+      return { ...state, loadingRecover: false };
     default:
       return state;
   }

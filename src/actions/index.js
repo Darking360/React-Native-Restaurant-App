@@ -60,3 +60,8 @@ export const updateUser = (payload) => ({
   type: 'UPDATE_USER',
   payload,
 });
+
+export const recoverPassword = (payload) => ({
+  type: 'RECOVER_PASSWORD',
+  payload,
+});

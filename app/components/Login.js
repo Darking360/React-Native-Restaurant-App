@@ -58,8 +58,7 @@ class LoginComponent extends Component {
         />
         <BR />
         <TextButton
-          onPress={() => {
-          }}
+          onPress={() => Actions.forgotPassword()}
           title="Olvidaste tu contrasenia?"
         />
         <BR />

@@ -19,6 +19,7 @@ import OrdersList from './screens/OrderListScreen';
 
 // New routes
 import EditScreen from './screens/EditScreen';
+import ForgotPassword from './screens/ForgotPassword';
 
 
 const AppRouter = () => (
@@ -31,7 +32,11 @@ const AppRouter = () => (
         initial
         hideNavBar
       />
-
+      <Scene
+        key="forgotPassword"
+        component={ForgotPassword}
+        title={'Recuperar Contrasena'}
+      />
       <Scene
         key="signupScreen"
         component={SignupScreen}
