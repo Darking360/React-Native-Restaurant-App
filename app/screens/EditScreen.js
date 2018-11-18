@@ -27,13 +27,13 @@ class LoginScreen extends Component {
       password: '',
       name: '',
       description: '',
+      address: '',
     };
   }
 
   componentDidMount() {
-    const { info: { user: { email, name, description } } } = this.props;
-    console.log(this.props)
-    this.setState({ email, name, description });
+    const { info: { user: { email, name, description, address } } } = this.props;
+    this.setState({ email, name, description, address });
   }
 
   handleEmailChange = (email) => {
@@ -60,10 +60,16 @@ class LoginScreen extends Component {
     });
   };
 
+  handleAddressChange = (address) => {
+    this.setState({
+      address,
+    });
+  };
+
   handleUpdateProfile = () => {
-    const { name, description, email, password } = this.state;
+    const { name, description, email, password, address } = this.state;
     const { updateUser } = this.props;
-    updateUser({ name, description, email, password });
+    updateUser({ name, description, email, password, address });
   }
 
   render() {
@@ -71,7 +77,7 @@ class LoginScreen extends Component {
 
     let { loginError } = this.props;
 
-    const { email, password, name, description } = this.state;
+    const { email, password, name, description, address } = this.state;
 
     const disabled = ((type === 'user' && (!email || email.length === 0)) || (type === 'store' && (!description || description.length === 0 || !name || name.length === 0)));
 
@@ -113,7 +119,26 @@ class LoginScreen extends Component {
         />
         <BR />
         {
-          type === 'store' && (
+          type === 'user' && (
+            <React.Fragment>
+              <TextInput
+                autoCorrect={false}
+                onChangeText={this.handleAddressChange}
+                style={{
+                  width: '80%',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+                underlineColorAndroid="#B9B9B9"
+                value={address}
+                placeholder="Direccion"
+              />
+              <BR />
+            </React.Fragment>
+          )
+        }
+        {
+          type === 'restaurant' && (
             <React.Fragment>
               <TextInput
                 autoCorrect={false}

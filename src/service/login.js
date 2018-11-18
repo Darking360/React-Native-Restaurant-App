@@ -9,20 +9,25 @@ function doLogin(email, password) {
   return request({ url: LOGIN_URL, method: 'POST', data });
 }
 
-function doRegister(email, password) {
+function doRegister(email, password, address, name, description, role) {
   const data = {
     email,
     password,
+    address,
+    name,
+    description,
+    role,
   };
   return request({ url: REGISTER_URL, method: 'POST', data });
 }
 
-function updateProfile(email, password, name, description, headers) {
+function updateProfile(email, password, name, description, address, headers) {
   const data = {
     email,
     password,
     name,
-    description
+    description,
+    address,
   };
   return request({ url: UPDATE_URL, method: 'PATCH', data, headers });
 }

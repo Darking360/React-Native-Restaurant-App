@@ -6,11 +6,15 @@ export const authLogin = (email, password) => ({
   },
 });
 
-export const authRegister = (email, password) => ({
+export const authRegister = (email, password, address, name, description, role) => ({
   type: 'AUTH_REGISTER',
   payload: {
     email,
     password,
+    address,
+    name,
+    description,
+    role,
   },
 });
 export const authLogout = () => ({

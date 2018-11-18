@@ -19,7 +19,7 @@ function* updateTask(action) {
 
     const authToken = yield select(authTokenSelector);
 
-    const res = yield call(Auth.updateProfile, payload.email, payload.password, payload.name, payload.description, {
+    const res = yield call(Auth.updateProfile, payload.email, payload.password, payload.name, payload.description, payload.address, {
       Authorization: `Bearer ${authToken}`,
     });
 
@@ -82,7 +82,7 @@ function* registerTask(action) {
 
     const { payload } = action;
 
-    const res = yield call(Auth.doRegister, payload.email, payload.password);
+    const res = yield call(Auth.doRegister, payload.email, payload.password, payload.address, payload.name, payload.description, payload.role);
 
     if (res.status === 200) {
       yield put({

@@ -19,9 +19,10 @@ class SignupComponent extends Component {
       loading, onSignupSubmit,
       onEmailChange, onPasswordChange,
       onNameChange, onDescriptionChange,
+      onAddressChange,
       registerError, disableSignUp,
       registerMessage, type,
-      email, password, name, description
+      email, password, name, description, address,
     } = this.props;
 
     if (registerMessage && registerMessage.success) {
@@ -71,6 +72,25 @@ class SignupComponent extends Component {
           placeholder="Password"
         />
         <BR />
+        {
+          type === 'user' && (
+            <React.Fragment>
+              <TextInput
+                autoCorrect={false}
+                onChangeText={onAddressChange}
+                style={{
+                  width: '80%',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+                underlineColorAndroid="#B9B9B9"
+                value={address}
+                placeholder="Direccion"
+              />
+              <BR />
+            </React.Fragment>
+          )
+        }
         {
           type === 'store' && (
             <React.Fragment>

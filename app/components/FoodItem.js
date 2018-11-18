@@ -17,8 +17,6 @@ class FoodItem extends React.Component {
   render() {
     const { food, onPress } = this.props;
     const { food: info } = food;
-    console.log('Aiuda ---->')
-    console.log(info)
     if (!info) {
       return <LoadingFood />;
     }

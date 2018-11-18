@@ -14,12 +14,14 @@ class SignupScreen extends Component {
     this.state = {
       email: null,
       password: null,
+      name: null,
+      description: null,
     };
   }
 
   handleSignUpSubmit = () => {
-    const { email, password } = this.state;
-    this.props.authRegister(email, password);
+    const { email, password, name, description } = this.state;
+    this.props.authRegister(email, password, null, name, description, 'restaurant');
   };
 
   handleEmailChange = (email) => {

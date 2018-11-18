@@ -12,14 +12,15 @@ class SignupScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: null,
-      password: null,
+      email: '',
+      password: '',
+      address: '',
     };
   }
 
   handleSignUpSubmit = () => {
-    const { email, password } = this.state;
-    this.props.authRegister(email, password);
+    const { email, password, address } = this.state;
+    this.props.authRegister(email, password, address, null, null, 'user');
   };
 
   handleEmailChange = (email) => {
@@ -34,9 +35,15 @@ class SignupScreen extends Component {
     });
   };
 
+  handleAddressChange = (address) => {
+    this.setState({
+      address,
+    });
+  };
+
   render() {
     const { registerLoading, registerError, registerMessage } = this.props;
-    const { email, password } = this.state;
+    const { email, password, address } = this.state;
     const disableSignUp = (!email || email.length === 0 || !password || password.length === 0);
 
     return (
@@ -49,8 +56,10 @@ class SignupScreen extends Component {
         onSignupSubmit={this.handleSignUpSubmit}
         onEmailChange={this.handleEmailChange}
         onPasswordChange={this.handlePasswordChange}
+        onAddressChange={this.handleAddressChange}
         email={email}
         password={password}
+        address={address}
       />);
   }
 }
