@@ -58,6 +58,7 @@ class RestaurantInfoScreen extends Component {
   );
 
   renderFoodItem = ({ item }) => {
+    console.log(item);
     if (item) {
       return (
         <FoodItem

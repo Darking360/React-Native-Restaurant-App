@@ -65,3 +65,8 @@ export const recoverPassword = (payload) => ({
   type: 'RECOVER_PASSWORD',
   payload,
 });
+
+export const doSearch = (payload) => ({
+  type: 'DO_SEARCH',
+  payload,
+});

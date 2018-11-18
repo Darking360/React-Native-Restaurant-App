@@ -28,13 +28,8 @@ class HomeScreen extends Component {
 
   componentDidMount() {
     const { restaurantList, cuisineTypes } = this.props;
-    if (!restaurantList || restaurantList.length === 0) {
-      this.props.fetchRestaurant();
-    }
-
-    if (!cuisineTypes || cuisineTypes.length === 0) {
-      this.props.fetchCuisineTypes();
-    }
+    this.props.fetchRestaurant();
+    this.props.fetchCuisineTypes();
   }
 
   handleFilter = (type) => {

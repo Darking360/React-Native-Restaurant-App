@@ -35,12 +35,16 @@ class OrdersList extends React.Component {
   componentWillMount() {
     this.props.fetchOrders();
   }
-  mapItems = items => items.map(item => (
-    <View>
-      <Text>{`Item ID: ${item.id}`}</Text>
-      <Text>{`Price: $. ${item.price}`}</Text>
-    </View>
-  ))
+  mapItems = item => {
+      console.log(item);
+      return (
+        <View key={item._id}>
+          <Text>{`Item ID: ${item.id}`}</Text>
+          <Text>{`Precio: $. ${item.price}`}</Text>
+        </View>
+      )
+  }
+
   renderItem = ({ item, index }) => (
     <View style={styles.card}>
       <View style={styles.divider}>
