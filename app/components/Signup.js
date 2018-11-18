@@ -46,7 +46,7 @@ class SignupComponent extends Component {
 
         <TextInput
           autoCorrect={false}
-          onChangeText={debounce(onEmailChange, 500)}
+          onChangeText={onEmailChange}
           style={{
             width: '80%',
             marginLeft: 'auto',
@@ -59,7 +59,7 @@ class SignupComponent extends Component {
         <BR />
         <TextInput
           autoCorrect={false}
-          onChangeText={debounce(onPasswordChange, 500)}
+          onChangeText={onPasswordChange}
           style={{
             width: '80%',
             marginLeft: 'auto',
@@ -76,7 +76,7 @@ class SignupComponent extends Component {
             <React.Fragment>
               <TextInput
                 autoCorrect={false}
-                onChangeText={debounce(onNameChange, 500)}
+                onChangeText={onNameChange}
                 style={{
                   width: '80%',
                   marginLeft: 'auto',
@@ -89,7 +89,7 @@ class SignupComponent extends Component {
               <BR />
               <TextInput
                 autoCorrect={false}
-                onChangeText={debounce(onDescriptionChange, 500)}
+                onChangeText={onDescriptionChange}
                 style={{
                   width: '80%',
                   marginLeft: 'auto',

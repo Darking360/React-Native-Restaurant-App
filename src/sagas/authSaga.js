@@ -13,6 +13,10 @@ function* updateTask(action) {
     });
     const { payload } = action;
 
+    Object.keys(payload).map((prop) => {
+      if (!payload[prop]) delete(payload[prop]);
+    });
+
     const authToken = yield select(authTokenSelector);
 
     const res = yield call(Auth.updateProfile, payload.email, payload.password, payload.name, payload.description, {

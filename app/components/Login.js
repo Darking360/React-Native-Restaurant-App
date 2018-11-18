@@ -32,7 +32,7 @@ class LoginComponent extends Component {
 
         <TextInput
           autoCorrect={false}
-          onChangeText={debounce(onEmailChange, 500)}
+          onChangeText={onEmailChange}
           style={{
             width: '80%',
             marginLeft: 'auto',
@@ -45,7 +45,7 @@ class LoginComponent extends Component {
         <BR />
         <TextInput
           autoCorrect={false}
-          onChangeText={debounce(onPasswordChange, 500)}
+          onChangeText={onPasswordChange}
           style={{
             width: '80%',
             marginLeft: 'auto',
