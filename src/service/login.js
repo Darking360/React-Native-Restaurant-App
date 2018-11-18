@@ -24,10 +24,11 @@ function updateProfile(email, password, name, description, headers) {
     name,
     description
   };
-  return request({ url: REGISTER_URL, method: 'PUT', data, headers });
+  return request({ url: UPDATE_URL, method: 'PATCH', data, headers });
 }
 
 export default {
   doLogin,
   doRegister,
+  updateProfile,
 };

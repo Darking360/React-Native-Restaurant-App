@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, select } from 'redux-saga/effects';
 import storage from 'redux-persist/lib/storage';
 import { ToastAndroid } from 'react-native';
 
@@ -6,7 +6,7 @@ const authTokenSelector = state => state.auth.loginMessage.token;
 
 import Auth from '../service/login';
 
-function* loginTask(action) {
+function* updateTask(action) {
   try {
     yield put({
       type: 'UPDATE_LOADING_ON',
@@ -15,7 +15,7 @@ function* loginTask(action) {
 
     const authToken = yield select(authTokenSelector);
 
-    const res = yield call(Auth.update, payload.email, payload.password, payload.name, payload.description, {
+    const res = yield call(Auth.updateProfile, payload.email, payload.password, payload.name, payload.description, {
       Authorization: `Bearer ${authToken}`,
     });
 
@@ -118,6 +118,7 @@ function* authSaga() {
   yield takeLatest('AUTH_LOGIN', loginTask);
   yield takeLatest('AUTH_REGISTER', registerTask);
   yield takeLatest('AUTH_LOGOUT', logoutTask);
+  yield takeLatest('UPDATE_USER', updateTask);
 }
 
 export default authSaga;

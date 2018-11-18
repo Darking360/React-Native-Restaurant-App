@@ -31,19 +31,10 @@ class LoginScreen extends Component {
   }
 
   componentDidMount() {
-    const { info } = this.props;
-    this.setState({ ...info });
+    const { info: { user: { email, name, description } } } = this.props;
+    console.log(this.props)
+    this.setState({ email, name, description });
   }
-
-  async componentWillReceiveProps(nextProps, nextContext) {
-    await this.handleRedirect(nextProps.loginMessage);
-  }
-
-
-  handleLoginSubmit = () => {
-    const { email, password } = this.state;
-    this.props.authLogin(email, password);
-  };
 
   handleEmailChange = (email) => {
     this.setState({
@@ -76,13 +67,13 @@ class LoginScreen extends Component {
   }
 
   render() {
-    const { info: { type, loadingUpdate } } = this.props;
+    const { info: { role: type }, loadingUpdate } = this.props;
 
     let { loginError } = this.props;
 
     const { email, password, name, description } = this.state;
 
-    const disabled = (!email || email.length === 0 || !name || name.length === 0 || !description || description.length === 0 || loadingUpdate);
+    const disabled = ((type === 'user' && (!email || email.length === 0)) || (type === 'store' && (!description || description.length === 0 || !name || name.length === 0)));
 
     return (
       <ScrollView
@@ -96,7 +87,7 @@ class LoginScreen extends Component {
 
         <TextInput
           autoCorrect={false}
-          onChangeText={debounce(this.handleEmailChange, 500)}
+          onChangeText={this.handleEmailChange}
           style={{
             width: '80%',
             marginLeft: 'auto',
@@ -109,7 +100,7 @@ class LoginScreen extends Component {
         <BR />
         <TextInput
           autoCorrect={false}
-          onChangeText={debounce(this.handlePasswordChange, 500)}
+          onChangeText={this.handlePasswordChange}
           style={{
             width: '80%',
             marginLeft: 'auto',
@@ -126,7 +117,7 @@ class LoginScreen extends Component {
             <React.Fragment>
               <TextInput
                 autoCorrect={false}
-                onChangeText={debounce(this.handleNameChange, 500)}
+                onChangeText={this.handleNameChange}
                 style={{
                   width: '80%',
                   marginLeft: 'auto',
@@ -139,7 +130,7 @@ class LoginScreen extends Component {
               <BR />
               <TextInput
                 autoCorrect={false}
-                onChangeText={debounce(this.handleDescriptionChange, 500)}
+                onChangeText={this.handleDescriptionChange}
                 style={{
                   width: '80%',
                   marginLeft: 'auto',
@@ -181,6 +172,7 @@ LoginScreen.propTypes = {
 function initMapStateToProps(state) {
   return {
     info: state.auth.loginMessage,
+    loadingUpdate: state.auth.loadingUpdate,
   };
 }
 
