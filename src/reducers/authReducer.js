@@ -5,6 +5,7 @@ const initialState = {
   registerLoading: false,
   registerError: null,
   registerMessage: null,
+  loadingUpdate: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -56,6 +57,10 @@ export default (state = initialState, { type, payload }) => {
       };
     case 'AUTH_LOGOUT_RESET':
       return initialState;
+    case 'UPDATE_LOADING_ON':
+      return { ...state, loadingUpdate: true };
+    case 'UPDATE_LOADING_OFF':
+      return { ...state, loadingUpdate: false };
     default:
       return state;
   }

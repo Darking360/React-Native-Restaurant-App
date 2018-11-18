@@ -1,8 +1,44 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import storage from 'redux-persist/lib/storage';
+import { ToastAndroid } from 'react-native';
 
+const authTokenSelector = state => state.auth.loginMessage.token;
 
 import Auth from '../service/login';
+
+function* loginTask(action) {
+  try {
+    yield put({
+      type: 'UPDATE_LOADING_ON',
+    });
+    const { payload } = action;
+
+    const authToken = yield select(authTokenSelector);
+
+    const res = yield call(Auth.update, payload.email, payload.password, payload.name, payload.description, {
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    if (res.status === 200) {
+      yield put({
+        type: 'UPDATE_LOADING_OFF',
+      });
+      ToastAndroid.show('Perfil actualizado!', ToastAndroid.SHORT);
+    } else {
+      yield put({
+        type: 'UPDATE_LOADING_OFF',
+      });
+      ToastAndroid.show('Algo ha ido mal, intenta de nuevo!', ToastAndroid.SHORT);
+    }
+  } catch (e) {
+    console.log(e);
+    const payload = typeof e === 'string' ? { message: e } : e.data;
+    yield put({
+      type: 'UPDATE_LOADING_OFF',
+    });
+    ToastAndroid.show('Algo ha ido mal, intenta de nuevo!', ToastAndroid.SHORT);
+  }
+}
 
 function* loginTask(action) {
   try {

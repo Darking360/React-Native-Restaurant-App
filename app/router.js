@@ -17,6 +17,9 @@ import SideDrawer from './screens/SideDrawer';
 import DrawerImage from './components/DrawerImage';
 import OrdersList from './screens/OrderListScreen';
 
+// New routes
+import EditScreen from './screens/EditScreen';
+
 
 const AppRouter = () => (
   <Router>
@@ -52,6 +55,16 @@ const AppRouter = () => (
             key="homeScreen"
             component={HomeScreen}
             title="Order my Food"
+            titleStyle={{
+              fontFamily: 'Roboto Slab',
+              color: Colors.primaryColor,
+            }}
+          />
+
+          <Scene
+            key="editScreen"
+            component={EditScreen}
+            title="Actualizar Perfil"
             titleStyle={{
               fontFamily: 'Roboto Slab',
               color: Colors.primaryColor,

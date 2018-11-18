@@ -1,5 +1,5 @@
 import request from './request';
-import { LOGIN_URL, REGISTER_URL } from './api_constants';
+import { LOGIN_URL, REGISTER_URL, UPDATE_URL } from './api_constants';
 
 function doLogin(email, password) {
   const data = {
@@ -15,6 +15,16 @@ function doRegister(email, password) {
     password,
   };
   return request({ url: REGISTER_URL, method: 'POST', data });
+}
+
+function updateProfile(email, password, name, description, headers) {
+  const data = {
+    email,
+    password,
+    name,
+    description
+  };
+  return request({ url: REGISTER_URL, method: 'PUT', data, headers });
 }
 
 export default {

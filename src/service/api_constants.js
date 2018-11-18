@@ -7,3 +7,4 @@ export const RESTAURANT_FILTER_URL = '/restaurant/filter';
 export const FOOD_INFO_URL = '/food';
 export const FOOD_TYPES_URL = '/food/types';
 export const ORDER_URL = '/orders';
+export const UPDATE_URL = '/auth/update';
