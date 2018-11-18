@@ -40,9 +40,6 @@ class SignupComponent extends Component {
         }}
       >
         <PrimaryText bold size={26}>{type === 'user' ? 'Persona' : 'Tienda'}</PrimaryText>
-        <BR size={20} />
-        {registerError && <PrimaryText>{registerError.message}</PrimaryText>}
-        {registerMessage && <PrimaryText>{JSON.stringify(registerMessage)}</PrimaryText>}
         <BR size={50} />
 
         <TextInput

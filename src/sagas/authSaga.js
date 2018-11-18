@@ -94,10 +94,12 @@ function* loginTask(action) {
         type: 'AUTH_LOGIN_ERROR',
         payload: res.data,
       });
+      ToastAndroid.show(res.data.message, ToastAndroid.SHORT);
     }
   } catch (e) {
     console.log(e);
-    const payload = typeof e === 'string' ? { message: e } : e.data;
+    const payload = typeof e === 'string' ? { message: e } : e.data.message;
+    ToastAndroid.show(payload, ToastAndroid.SHORT);
     yield put({
       type: 'AUTH_LOGIN_ERROR',
       payload,
@@ -125,10 +127,12 @@ function* registerTask(action) {
         type: 'AUTH_REGISTER_ERROR',
         payload: res.data,
       });
+      ToastAndroid.show(res.data.message, ToastAndroid.SHORT);
     }
   } catch (e) {
     console.log(e);
-    const payload = typeof e === 'string' ? { message: e } : e.data;
+    const payload = typeof e === 'string' ? { message: e } : e.data.message;
+    ToastAndroid.show(payload, ToastAndroid.SHORT);
     yield put({
       type: 'AUTH_REGISTER_ERROR',
       payload,
