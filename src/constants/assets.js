@@ -16,5 +16,6 @@ export default {
     banana: require('../../assets/images/banana.png'),
     paymentComplete: require('../../assets/images/check.png'),
     paymentFailed: require('../../assets/images/cross.png'),
+    bitcoin: require('../../assets/images/bitcoin.png'),
   },
 };

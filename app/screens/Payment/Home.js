@@ -5,12 +5,12 @@ import debounce from 'lodash/debounce';
 import styled from 'styled-components';
 import Stripe from 'react-native-stripe-api';
 import { CreditCardInput } from 'react-native-credit-card-input';
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, Picker } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-
+import BitcoinPay from '../../components/BitcoinPay';
 import RoundButton from '../../base_components/RoundButton';
 import AppBase from '../../base_components/AppBase';
 import BR from '../../base_components/BR';
@@ -69,6 +69,7 @@ class PaymentHome extends Component {
       cardData: {},
       validData: false,
       loadingPayment: false,
+      option: 0,
     };
   }
 
@@ -127,6 +128,7 @@ class PaymentHome extends Component {
 
   render() {
     const { orderId, totalAmount } = this.props;
+    const { option } = this.state;
 
     return (
       <AppBase>
@@ -140,78 +142,100 @@ class PaymentHome extends Component {
             <BR size={10} />
             <Section>
               <SectionItem>
-                <Heading>{'ID de la Orden'.toUpperCase()}</Heading>
-                <SubHeading>{orderId}</SubHeading>
+                <Picker
+                selectedValue={option}
+                style={{ height: 50, width: 500 }}
+                onValueChange={(itemValue, itemIndex) => this.setState({option: itemValue})}>
+                  <Picker.Item label="Tarjeta de Credito" value={0} />
+                  <Picker.Item label="Bitcoin" value={1} />
+                </Picker>
               </SectionItem>
             </Section>
+            <BR size={10} />
+            {
+              option === 0 ?
+                <React.Fragment>
+                  <Section>
+                    <SectionItem>
+                      <Heading>{'ID de la Orden'.toUpperCase()}</Heading>
+                      <SubHeading>{orderId}</SubHeading>
+                    </SectionItem>
+                  </Section>
 
-            <Section>
-              <SectionItem>
-                <Heading>SERVICIO</Heading>
-                <SubHeading>Order my Food</SubHeading>
-              </SectionItem>
-              <SectionItem>
-                <Heading>PRECIO</Heading>
-                <SubHeading>$ {totalAmount}</SubHeading>
-              </SectionItem>
-            </Section>
+                  <Section>
+                    <SectionItem>
+                      <Heading>SERVICIO</Heading>
+                      <SubHeading>Order my Food</SubHeading>
+                    </SectionItem>
+                    <SectionItem>
+                      <Heading>PRECIO</Heading>
+                      <SubHeading>$ {totalAmount}</SubHeading>
+                    </SectionItem>
+                  </Section>
 
-            <Section style={{
-              elevation: 2,
-              borderBottomWidth: 2,
-              borderBottomColor: '#eee',
-            }}
-            >
-              <SectionItem>
-                <Heading>Fecha</Heading>
-                <SubHeading>{new Date().toDateString()}</SubHeading>
-              </SectionItem>
-            </Section>
+                  <Section style={{
+                    elevation: 2,
+                    borderBottomWidth: 2,
+                    borderBottomColor: '#eee',
+                  }}
+                  >
+                    <SectionItem>
+                      <Heading>Fecha</Heading>
+                      <SubHeading>{new Date().toDateString()}</SubHeading>
+                    </SectionItem>
+                  </Section>
 
-            <View style={{
-              marginTop: 20,
-            }}
-            >
-              <CreditCardInput
-                requiresCVC
-                cardScale={1}
-                inputContainerStyle={{
-                  backgroundColor: '#FFF',
-                  paddingTop: 15,
-                  paddingBottom: 5,
-                  flexDirection: 'column',
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                  borderWidth: 1,
-                  borderColor: '#eee',
-                  minWidth: 150,
-                  borderRadius: 6,
-                }}
-                onChange={debounce(this._onChange, 500)}
-                labels={{ number: "NUMERO DE TARJETA", expiry: "VENCIMIENTO", cvc: "CVC/CCV" }}
-              />
-            </View>
+                  <View style={{
+                    marginTop: 20,
+                  }}
+                  >
+                    <CreditCardInput
+                      requiresCVC
+                      cardScale={1}
+                      inputContainerStyle={{
+                        backgroundColor: '#FFF',
+                        paddingTop: 15,
+                        paddingBottom: 5,
+                        flexDirection: 'column',
+                        paddingLeft: 20,
+                        paddingRight: 20,
+                        borderWidth: 1,
+                        borderColor: '#eee',
+                        minWidth: 150,
+                        borderRadius: 6,
+                      }}
+                      onChange={debounce(this._onChange, 500)}
+                      labels={{ number: "NUMERO DE TARJETA", expiry: "VENCIMIENTO", cvc: "CVC/CCV" }}
+                    />
+                  </View>
 
-            <RoundButton
-              loading={this.state.loadingPayment}
-              title="Pagar"
-              buttonColor={Colors.green}
-              onPress={() => this.doPayment()}
-              disabled={!this.state.validData}
-              baseStyle={{
-                marginTop: 30,
-                marginBottom: Platform.OS === 'ios' ? 100 : 20,
-              }}
-            />
+                  <RoundButton
+                    loading={this.state.loadingPayment}
+                    title="Pagar"
+                    buttonColor={Colors.green}
+                    onPress={() => this.doPayment()}
+                    disabled={!this.state.validData}
+                    baseStyle={{
+                      marginTop: 30,
+                      marginBottom: Platform.OS === 'ios' ? 100 : 20,
+                    }}
+                  />
 
-            <RoundButton
-              title="Cancelar"
-              onPress={() => this.handleCancelOrder()}
-              baseStyle={{
-                marginTop: 30,
-                marginBottom: Platform.OS === 'ios' ? 100 : 20,
-              }}
-            />
+                  <RoundButton
+                    title="Cancelar"
+                    onPress={() => this.handleCancelOrder()}
+                    baseStyle={{
+                      marginTop: 30,
+                      marginBottom: Platform.OS === 'ios' ? 100 : 20,
+                    }}
+                  />
+                </React.Fragment>
+              :
+                <Section>
+                  <BitcoinPay />
+                </Section>
+            }
+
 
           </ScrollView>
         </KeyboardAvoidingView>
