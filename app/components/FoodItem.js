@@ -68,6 +68,19 @@ class FoodItem extends React.Component {
                 {translate[info.type]}
               </SecondaryText>
             </View>
+            {
+              !preview && (
+                <View
+                  style={{
+                    flex: 1,
+                  }}
+                >
+                  <PrimaryText size={20} color={Colors.moneyColor}>
+                    $ {food.price}
+                  </PrimaryText>
+                </View>
+              )
+            }
           </ViewRow>
           {
             !preview ? (

@@ -106,6 +106,7 @@ function initMapStateToProps(state) {
   return {
     cuisineTypes: state.food.cuisineTypes,
     restaurantList: state.restaurant.fullList,
+    role: state.auth.loginMessage,
   };
 }
 

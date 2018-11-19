@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import startCase from 'lodash/startCase';
 
+import SignOutButton from '../components/RightHeaderButtons';
 import TextInput from '../base_components/TextInput';
 import RoundButton from '../base_components/RoundButton';
 import AppBase from '../base_components/AppBase';
@@ -65,7 +66,7 @@ class SearchScreen extends Component {
       fontWeight: 'bold',
     },
     headerBackTitle: 'Home',
-    headerLeft: null,
+    headerRight: <SignOutButton />,
   };
 
   constructor(props) {
