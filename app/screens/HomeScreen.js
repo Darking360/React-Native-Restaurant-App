@@ -289,7 +289,7 @@ function initMapStateToProps(state) {
     food: state.food.myfood,
     cuisineTypes: state.food.cuisineTypes,
     restaurantList: state.restaurant.fullList,
-    role: state.auth.loginMessage.role,
+    role: state.auth.loginMessage ? state.auth.loginMessage.role : 'user',
   };
 }
 
