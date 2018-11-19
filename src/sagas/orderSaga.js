@@ -69,6 +69,7 @@ function* orderTask(action) {
 }
 
 function* doSearch(action) {
+  console.log('AIUDA ----->')
   try {
     const { payload } = action;
 
@@ -76,7 +77,7 @@ function* doSearch(action) {
       type: 'SEARCHING_ON',
     });
 
-    const method = payload.type === 0 ? APIFood.doSearchFood : doSearchRestaurant;
+    const method = payload.option === 0 ? APIFood.doSearchFood : APIFood.oSearchRestaurant;
 
     const res = yield call(method, payload.search);
 

@@ -36,6 +36,13 @@ class RightHeaderButtons extends Component {
         ai="center"
       >
         <RippleIcon
+          dark
+          size={20
+          }
+          name="ios-cart-outline"
+          onPress={() => Actions.searchScreen()}
+        />
+        <RippleIcon
           name="ios-cart-outline"
           dark
           size={20}

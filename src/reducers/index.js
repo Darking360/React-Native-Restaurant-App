@@ -49,7 +49,7 @@ const rootReducer = combineReducers({
   restaurant: persistReducer(restaPersistConfig, restaurantReducer),
   food: persistReducer(foodPersistConfig, foodsReducer),
   cart: persistReducer(cartPersistConfig, cartReducer),
-  orders: persistReducer(orderPersistConfig, ordersReducer),
+  orders: ordersReducer,
 });
 
 export default rootReducer;

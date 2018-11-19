@@ -20,6 +20,7 @@ import OrdersList from './screens/OrderListScreen';
 // New routes
 import EditScreen from './screens/EditScreen';
 import ForgotPassword from './screens/ForgotPassword';
+import SearchScreen from './screens/SearchScreen';
 
 
 const AppRouter = () => (
@@ -60,6 +61,16 @@ const AppRouter = () => (
             key="homeScreen"
             component={HomeScreen}
             title="Order my Food"
+            titleStyle={{
+              fontFamily: 'Roboto Slab',
+              color: Colors.primaryColor,
+            }}
+          />
+
+          <Scene
+            key="searchScreen"
+            component={SearchScreen}
+            title="Busqueda"
             titleStyle={{
               fontFamily: 'Roboto Slab',
               color: Colors.primaryColor,

@@ -5,17 +5,18 @@ import debounce from 'lodash/debounce';
 import styled from 'styled-components';
 import Stripe from 'react-native-stripe-api';
 import { CreditCardInput } from 'react-native-credit-card-input';
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, Picker } from 'react-native';
+import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, Picker, ActivityIndicator, FlatList } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import RoundButton from '../../base_components/RoundButton';
-import AppBase from '../../base_components/AppBase';
-import BR from '../../base_components/BR';
-import Colors from '../../../src/constants/colors';
-import PrimaryText from '../../base_components/PrimaryText';
-import { doCancelOrder } from '../../../src/actions';
+import TextInput from '../base_components/TextInput';
+import RoundButton from '../base_components/RoundButton';
+import AppBase from '../base_components/AppBase';
+import BR from '../base_components/BR';
+import Colors from '../../src/constants/colors';
+import PrimaryText from '../base_components/PrimaryText';
+import { doSearch } from '../../src/actions';
 
 const windowWidth = Dimensions.get('window').width - 18;
 
@@ -69,24 +70,46 @@ class PaymentHome extends Component {
     };
   }
 
+  handleSearch = debounce(() => {
+    const { search, option } = this.state;
+    const { doSearch } = this.props;
+    doSearch({search, option});
+  },300);
 
-  _onChange = (form) => {
-    this.setState((s, p) => ({
-      cardData: form,
-      validData: form.valid,
-    }));
-  };
+  onSearchChange = (search) => {
+    this.setState({ search }, () => {
+      this.handleSearch();
+    })
+  }
+
+  renderItem = () => {
+    const { option } = this.state;
+    return(<View />)
+  }
 
   renderSelection = () => {
     const { option } = this.state;
+    const { searchItems } = this.props;
     <FlatList
-      data={}
+      data={searchItems}
+      renderItem={this.renderItem}
     />
   }
 
+  renderLoading = () => {
+    const { loading } = this.props;
+    if (loading) {
+      return (
+        <ActivityIndicator size="large" />
+      );
+    }
+  }
+
   render() {
-    const { orderId, totalAmount } = this.props;
-    const { option } = this.state;
+    const { option, search } = this.state;
+
+    console.log('pprops ---->')
+    console.log(this.props)
 
     return (
       <AppBase>
@@ -108,9 +131,23 @@ class PaymentHome extends Component {
                   <Picker.Item label="Restaurant" value={1} />
                 </Picker>
               </SectionItem>
+              <BR size={10} />
+              <TextInput
+                autoCorrect={false}
+                onChangeText={this.onSearchChange}
+                style={{
+                  width: '80%',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                }}
+                underlineColorAndroid="#B9B9B9"
+                value={search}
+                placeholder="Buscar"
+              />
             </Section>
             <BR size={10} />
             <Section>
+              { this.renderLoading() }
               { this.renderSelection() }
             </Section>
           </ScrollView>
@@ -133,15 +170,9 @@ PaymentHome.propTypes = {
 
 function initMapStateToProps(state) {
   return {
-    searchItemms: state.foods.results,
+    searchItems: state.food.results,
+    loading: state.food.loadingSearch,
   };
 }
 
-function initMapDispatchToProps(dipatch) {
-  return bindActionCreators({
-    makeSearch,
-  }, dipatch);
-}
-
-
-export default connect(initMapStateToProps, initMapDispatchToProps)(PaymentHome);
+export default connect(initMapStateToProps, { doSearch })(PaymentHome);

@@ -38,9 +38,10 @@ class OrdersList extends React.Component {
   mapItems = item => {
       console.log(item);
       return (
-        <View key={item._id}>
-          <Text>{`Item ID: ${item.id}`}</Text>
+        <View key={item.food._id}>
+          <Text>{`Item: ${item.food.name}`}</Text>
           <Text>{`Precio: $. ${item.price}`}</Text>
+          <Text>{`Cantidad: ${item.quantity}`}</Text>
         </View>
       )
   }

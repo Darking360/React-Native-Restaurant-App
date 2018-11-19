@@ -1,6 +1,8 @@
 const initialState = {
   cuisineTypes: [],
   cuisineTypesError: null,
+  loadingSearch: false,
+  results: [],
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -15,6 +17,21 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         cuisineTypesError: payload,
+      };
+    case 'SET_SEARCH_RESULTS':
+      return {
+        ...state,
+        results: payload,
+      };
+    case 'SEARCHING_ON':
+      return {
+        ...state,
+        loadingSearch: true,
+      };
+    case 'SEARCHING_OFF':
+      return {
+        ...state,
+        loadingSearch: false,
       };
     default:
       return state;
