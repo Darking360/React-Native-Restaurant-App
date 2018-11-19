@@ -103,10 +103,119 @@ function* doSearch(action) {
   }
 }
 
+// FOOD SAGAS
+
+function* deleteFood(action) {
+  try {
+    const { payload } = action;
+
+    const authToken = yield select(authTokenSelector);
+
+    const res = yield call(APIFood.createFood, payload.name, payload.price, payload.type, {
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    if (res.status === 200) {
+      yield put({
+        type: 'GET_MY_FOOD',
+      });
+      ToastAndroid.show('Comida eliminada!', ToastAndroid.SHORT);
+    } else {
+      yield put({
+        type: 'FOODLOADING_OFF',
+      });
+      ToastAndroid.show('Error eliminando comida', ToastAndroid.SHORT);
+    }
+  } catch (e) {
+    console.log(e);
+    yield put({
+      type: 'FOODLOADING_OFF',
+    });
+    ToastAndroid.show('Error eliminando comida', ToastAndroid.SHORT);
+  }
+}
+
+function* createFood(action) {
+  console.log('AIUDA ---->')
+  console.log(action)
+  try {
+    const { payload } = action;
+
+    yield put({
+      type: 'FOODLOADING_ON',
+    });
+
+    const authToken = yield select(authTokenSelector);
+
+    const res = yield call(APIFood.createFood, payload.name, payload.price, payload.type, {
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    if (res.status === 200) {
+      yield put({
+        type: 'GET_MY_FOOD',
+      });
+      ToastAndroid.show('Comida creada!', ToastAndroid.SHORT);
+    } else {
+      yield put({
+        type: 'FOODLOADING_OFF',
+      });
+      ToastAndroid.show('Error creando comida', ToastAndroid.SHORT);
+    }
+  } catch (e) {
+    console.log(e);
+    yield put({
+      type: 'FOODLOADING_OFF',
+    });
+    ToastAndroid.show('Error creando comida', ToastAndroid.SHORT);
+  }
+}
+
+function* getMyFood(action) {
+  try {
+    const { payload } = action;
+
+    yield put({
+      type: 'FOODLOADING_ON',
+    });
+
+    const authToken = yield select(authTokenSelector);
+
+    const res = yield call(APIFood.getMyFood, {
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    if (res.status === 200) {
+      yield put({
+        type: 'SET_MY_FOOD',
+        payload: res.data.foods,
+      });
+      yield put({
+        type: 'FOODLOADING_OFF',
+      });
+    } else {
+      yield put({
+        type: 'FOODLOADING_OFF',
+      });
+      ToastAndroid.show('Error obteniendo comida', ToastAndroid.SHORT);
+    }
+  } catch (e) {
+    console.log(e);
+    yield put({
+      type: 'FOODLOADING_OFF',
+    });
+    ToastAndroid.show('Error obteniendo comida', ToastAndroid.SHORT);
+  }
+}
+
 function* orderSaga() {
   yield takeLatest('FETCH_ORDERS', orderFetchTask);
   yield takeLatest('CREATE_ORDER', orderTask);
   yield takeLatest('DO_SEARCH', doSearch);
+  // FOOD SAGAS
+  yield takeLatest('CREATE_FOOD', createFood);
+  yield takeLatest('GET_MY_FOOD', getMyFood);
+  yield takeLatest('DELETE_FOOD', deleteFood);
 }
 
 export default orderSaga;

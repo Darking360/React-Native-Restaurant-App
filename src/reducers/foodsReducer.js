@@ -3,6 +3,8 @@ const initialState = {
   cuisineTypesError: null,
   loadingSearch: false,
   results: [],
+  myfood: [],
+  foodLoading: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -38,6 +40,15 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loadingSearch: false,
       };
+    case 'SET_MY_FOOD':
+      return {
+        ...state,
+        myfood: payload,
+      };
+    case 'FOODLOADING_ON':
+      return { ...state, foodLoading: true };
+    case 'FOODLOADING_OFF':
+      return { ...state, foodLoading: false };
     default:
       return state;
   }

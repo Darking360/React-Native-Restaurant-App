@@ -12,3 +12,4 @@ export const UPDATE_URL = '/auth/update';
 export const RECOVER_URL = '/auth/recover';
 export const SEARCH_FOOD = '/food';
 export const SEARCH_RESTAURANT = '/restaurant';
+export const GET_MY_FOOD = '/restaurant/mine';

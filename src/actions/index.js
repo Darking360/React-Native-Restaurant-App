@@ -78,3 +78,19 @@ export const resetResults = (payload) => ({
 export const resetCart = (payload) => ({
   type: 'RESET_CART',
 });
+
+//  Store specific
+
+export const createFood = (payload) => ({
+  type: 'CREATE_FOOD',
+  payload,
+});
+
+export const getMyFood = () => ({
+  type: 'GET_MY_FOOD',
+});
+
+export const deleteFood = (payload) => ({
+  type: 'CREATE_FOOD',
+  payload,
+});

@@ -15,7 +15,7 @@ import { translate } from '../../src/utils/language';
 
 class FoodItem extends React.Component {
   render() {
-    const { food, onPress, preview, upperPress } = this.props;
+    const { food, onPress, preview, upperPress, isStore } = this.props;
     const { food: info } = food;
     if (!info) {
       return <LoadingFood />;
@@ -83,13 +83,13 @@ class FoodItem extends React.Component {
             }
           </ViewRow>
           {
-            !preview ? (
+            (!preview && !isStore) ? (
               <FlatButton
                 key="add2Cart"
                 title="Agregar a Carrito"
                 onPress={onPress}
               />
-            ) : (
+            ) : !isStore && (
               <View
                 style={{
                   flex: 1,

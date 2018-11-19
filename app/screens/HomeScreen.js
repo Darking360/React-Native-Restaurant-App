@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { ScrollView, FlatList, Picker } from 'react-native';
+import { ScrollView, FlatList, Picker, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import startCase from 'lodash/startCase';
 import styled from 'styled-components';
 
+import ViewRow from '../base_components/ViewRow';
 import BR from '../base_components/BR';
 import SignOutButton from '../components/RightHeaderButtons';
 import FoodItem from '../components/FoodItem';
@@ -17,7 +18,8 @@ import PrimaryText from '../base_components/PrimaryText';
 import RestaurantList from '../components/RestaurantList';
 import TextInput from '../base_components/TextInput';
 import FilterRadioModal from '../components/FilterRadioModal';
-import { fetchCuisineTypes, fetchRestaurant, fetchRestaurantByType } from '../../src/actions/index';
+import RoundButton from '../base_components/RoundButton';
+import { fetchCuisineTypes, fetchRestaurant, fetchRestaurantByType, createFood, getMyFood } from '../../src/actions/index';
 
 const Heading = styled.Text`
   font-size: 14px;
@@ -61,13 +63,35 @@ class HomeScreen extends Component {
     };
   }
 
+  renderHeader = () => (
+    <ViewRow
+      jc="space-between"
+      style={{
+        backgroundColor: '#fff',
+        borderColor: '#eee',
+        padding: 20,
+        borderBottomWidth: 1,
+        marginTop: 2,
+      }}
+    >
+      <PrimaryText
+        style={{
+          flex: 1,
+        }}
+        size={20}
+      >
+        Mis Comidas
+      </PrimaryText>
+    </ViewRow>
+  );
+
   componentDidMount() {
-    const { restaurantList, cuisineTypes, role } = this.props;
+    const { restaurantList, cuisineTypes, role, getMyFood } = this.props;
     if (role === 'user') {
       this.props.fetchRestaurant();
       this.props.fetchCuisineTypes();
     } else {
-      // TODO get my food listed to delete it or something
+      getMyFood();
     }
   }
 
@@ -93,6 +117,7 @@ class HomeScreen extends Component {
     <FlatList
       data={foods}
       bounces={false}
+      style={{ width: '100%' }}
       ListHeaderComponent={this.renderHeader}
       keyExtractor={item => item._id}
       renderItem={this.renderFoodItem}
@@ -103,6 +128,7 @@ class HomeScreen extends Component {
     if (item) {
       return (
         <FoodItem
+          isStore
           key={item.food._id}
           food={item}
           onPress={() => this.props.updateCartItems(item, 1)}
@@ -112,11 +138,28 @@ class HomeScreen extends Component {
     return null;
   };
 
+  renderLoading = () => {
+    return (
+      <ActivityIndicator size="large" />
+    );
+  }
+
   onNameChange = (name) => this.setState({ name })
   onPriceChange = (price) => {
     if (/[0-9]+/.test(price)) this.setState({ price })
   }
   onTypeChange = (type) => this.setState({ type })
+
+  handleCreateFood = () => {
+    const { name, price, type } = this.state;
+    const { createFood } = this.props;
+    createFood({
+      name, price, type,
+      cb: () => {
+        this.setState({ name: '', price: '' })
+      }
+    })
+  }
 
   render() {
     const filterData = this.props.cuisineTypes.map(type => ({
@@ -124,8 +167,10 @@ class HomeScreen extends Component {
       label: startCase(type),
     }));
 
-    const { role, food } = this.props;
+    const { role, food, loadingFood } = this.props;
     const { name, price, type } = this.state;
+
+    const disabled = (!name || name.length === 0 || !price || price.length === 0 || !type || type.length === 0);
 
     return (
       <AppBase style={{
@@ -195,11 +240,26 @@ class HomeScreen extends Component {
                     <Picker.Item label="Pizza" value={'pizza'} />
                     <Picker.Item label="Helado" value={'ice-cream'} />
                   </Picker>
+                  <RoundButton
+                    title="Crear"
+                    loading={loadingFood}
+                    disabled={disabled}
+                    onPress={this.handleCreateFood}
+                  />
                 </SectionItem>
               </Section>
               <BR size={20} />
               <Section>
                 <SectionItem>
+                  {
+                    loadingFood ?
+                     this.renderLoading()
+                    :
+                      food.length === 0 ?
+                        <PrimaryText>Aun no tienes comida creada...</PrimaryText>
+                      :
+                        this.renderFoodList(food)
+                  }
                 </SectionItem>
               </Section>
             </ScrollView>
@@ -225,6 +285,7 @@ HomeScreen.propTypes = {
 
 function initMapStateToProps(state) {
   return {
+    loadingFood: state.food.foodLoading,
     food: state.food.myfood,
     cuisineTypes: state.food.cuisineTypes,
     restaurantList: state.restaurant.fullList,
@@ -237,6 +298,8 @@ function initMapDispatchToProps(dispatch) {
     fetchRestaurant,
     fetchRestaurantByType,
     fetchCuisineTypes,
+    createFood,
+    getMyFood,
     // fetchCartItems,
   }, dispatch);
 }
