@@ -21,6 +21,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         createdOrder: payload,
         createdOrderError: null,
+        ordersList: [],
       };
     case 'CREATE_ORDER_ERROR':
       return {

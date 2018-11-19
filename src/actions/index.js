@@ -74,3 +74,7 @@ export const doSearch = (payload) => ({
 export const resetResults = (payload) => ({
   type: 'RESET_RESULTS',
 });
+
+export const resetCart = (payload) => ({
+  type: 'RESET_CART',
+});

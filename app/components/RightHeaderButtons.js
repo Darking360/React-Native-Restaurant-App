@@ -41,12 +41,14 @@ class RightHeaderButtons extends Component {
           }
           name="ios-search"
           onPress={() => Actions.searchScreen()}
+          style={{ paddingLeft: 25 }}
         />
         <RippleIcon
           name="ios-cart-outline"
           dark
           size={20}
           onPress={() => Actions.cartScreen()}
+          style={{ paddingLeft: 15 }}
         >
           <View
             style={{

@@ -19,6 +19,12 @@ export default (state = initialState, { type, payload = {} }) => {
         ...state,
         inProgress: true,
       };
+    case 'RESET_CART':
+    console.log('RESETEA CARRO ---->')
+      return {
+        ...state,
+        cartData: [],
+      };
     default:
       return state;
   }

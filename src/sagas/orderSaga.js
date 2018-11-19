@@ -69,7 +69,6 @@ function* orderTask(action) {
 }
 
 function* doSearch(action) {
-  console.log('AIUDA ----->')
   try {
     const { payload } = action;
 

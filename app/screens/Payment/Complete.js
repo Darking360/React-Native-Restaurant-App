@@ -3,6 +3,8 @@ import { Image, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { resetCart } from '../../../src/actions/index';
 
 import RoundButton from '../../base_components/RoundButton';
 import AppBase from '../../base_components/AppBase';
@@ -53,7 +55,7 @@ class PaymentComplete extends Component {
   };
 
   render() {
-    const { totalAmount } = this.props;
+    const { totalAmount, resetCart } = this.props;
     let rupee = `${totalAmount}`;
     let paise = '00';
     if (totalAmount.toString().includes('.')) {
@@ -107,6 +109,9 @@ class PaymentComplete extends Component {
           title="Ir a Inicio"
           onPress={() => {
             Actions.reset('drawer');
+            setTimeout(() => {
+              resetCart();
+            }, 500);
           }}
         />
       </AppBase>
@@ -118,4 +123,4 @@ PaymentComplete.propTypes = {
   totalAmount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
-export default PaymentComplete;
+export default connect(null, { resetCart })(PaymentComplete);
