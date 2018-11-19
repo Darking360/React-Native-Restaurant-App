@@ -22,14 +22,14 @@ function getAllCuisineTypes(headers = null) {
 
 function doSearchFood(search) {
   return request({
-    url: `${SEARCH_FOOD}/${search}`, method: 'GET',
+    url: `${SEARCH_RESTAURANT}/?name=${search}`, method: 'GET',
   });
 
 }
 
 function doSearchRestaurant(search) {
   return request({
-    url: `${SEARCH_RESTAURANT}/${search}`, method: 'GET',
+    url: `${SEARCH_FOOD}?name=${search}`, method: 'GET',
   });
 }
 

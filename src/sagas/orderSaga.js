@@ -77,7 +77,7 @@ function* doSearch(action) {
       type: 'SEARCHING_ON',
     });
 
-    const method = payload.option === 0 ? APIFood.doSearchFood : APIFood.oSearchRestaurant;
+    const method = payload.option === 0 ? APIFood.doSearchFood : APIFood.doSearchRestaurant;
 
     const res = yield call(method, payload.search);
 

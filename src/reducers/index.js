@@ -47,7 +47,7 @@ const orderPersistConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   restaurant: persistReducer(restaPersistConfig, restaurantReducer),
-  food: persistReducer(foodPersistConfig, foodsReducer),
+  food: foodsReducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
   orders: ordersReducer,
 });

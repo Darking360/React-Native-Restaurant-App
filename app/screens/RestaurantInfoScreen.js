@@ -22,7 +22,7 @@ class RestaurantInfoScreen extends Component {
   });
 
   componentDidMount() {
-    this.props.fetchRestaurant();
+    // this.props.fetchRestaurant();
   }
 
   renderFoodList = foods => (

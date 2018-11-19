@@ -70,3 +70,7 @@ export const doSearch = (payload) => ({
   type: 'DO_SEARCH',
   payload,
 });
+
+export const resetResults = (payload) => ({
+  type: 'RESET_RESULTS',
+});

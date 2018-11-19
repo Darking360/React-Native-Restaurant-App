@@ -15,7 +15,7 @@ import { translate } from '../../src/utils/language';
 
 class FoodItem extends React.Component {
   render() {
-    const { food, onPress } = this.props;
+    const { food, onPress, preview, upperPress } = this.props;
     const { food: info } = food;
     if (!info) {
       return <LoadingFood />;
@@ -23,6 +23,7 @@ class FoodItem extends React.Component {
     return (
       <TouchableOpacity
         activeOpacity={0.6}
+        onPress={upperPress}
       >
         <View
           key={food._id}
@@ -67,21 +68,26 @@ class FoodItem extends React.Component {
                 {translate[info.type]}
               </SecondaryText>
             </View>
-            <View
-              style={{
-                flex: 1,
-              }}
-            >
-              <PrimaryText size={20} color={Colors.moneyColor}>
-                $ {food.price}
-              </PrimaryText>
-            </View>
           </ViewRow>
-          <FlatButton
-            key="add2Cart"
-            title="Add to Cart"
-            onPress={onPress}
-          />
+          {
+            !preview ? (
+              <FlatButton
+                key="add2Cart"
+                title="Agregar a Carrito"
+                onPress={onPress}
+              />
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                }}
+              >
+                <PrimaryText size={20} color={Colors.green}>
+                  Restaurante: { info.restaurant.name }
+                </PrimaryText>
+              </View>
+            )
+          }
         </View>
       </TouchableOpacity>
     );

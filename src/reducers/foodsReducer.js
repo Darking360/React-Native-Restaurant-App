@@ -23,6 +23,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         results: payload,
       };
+    case 'RESET_RESULTS':
+      return {
+        ...state,
+        results: [],
+      };
     case 'SEARCHING_ON':
       return {
         ...state,
